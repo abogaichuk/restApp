@@ -1,17 +1,18 @@
 package my.rest.application.api;
 
+import lombok.extern.slf4j.Slf4j;
 import my.rest.application.domain.entity.City;
 import my.rest.application.domain.entity.Customer;
 import my.rest.application.domain.entity.Position;
 import my.rest.application.domain.repository.CustomerRepository;
-import my.rest.application.utils.Utils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpEntity;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
+import java.util.Optional;
 import java.util.function.Predicate;
 
 import static my.rest.application.utils.Utils.isNotNullAndNotEmpty;
@@ -21,6 +22,7 @@ import static org.springframework.http.HttpStatus.*;
  * @author abogaichuk
  */
 @RestController
+@Slf4j
 public class CustomerCtrl {
 
     @Autowired
@@ -28,6 +30,7 @@ public class CustomerCtrl {
 
     @PostMapping("/customers/")
     public ResponseEntity create(@RequestParam("count") Integer count) {
+        log.info("message");
         if (count == null || count <= 0)
             return new ResponseEntity(BAD_REQUEST);
 
